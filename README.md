@@ -48,7 +48,7 @@ __物理像素 和 独立像素 具体差别__
 2.dpr为2，根据上面的公式，他的物理像素就应该是```750x1334```,正如上面的公式，在iPhone6下1单位css像素实际是4单位的物理像素（1px css像素=2px 物理像素）
 
 具体可以用下面的图来解释
-![](./src/1.png)
+![](http://o9w4menvt.bkt.clouddn.com/1.png)
 
 _ _ _
 
@@ -64,7 +64,7 @@ _ _ _
 
 具体差别用下图来解释
 
-![](./src/4.png)
+![](http://o9w4menvt.bkt.clouddn.com/4.png)
 
 如上图：一张```2px 2px```的图，如果放在普通屏幕下也就是dpr=1（1独立像素=1物理像素）是没有影响的，
 但在retina屏幕下就出现图片像素不够用被拉升分布在4x4个像素下，由于位图像素不可以进一步分像素了，所以只能取临色，
@@ -127,7 +127,7 @@ __布局视口（layout viewport）__
 
 ```就是下图中蓝色区域，最先手机端是直接只显示这个区域的，然后通过左右上下滚动 外加缩放 查看```
 
-![](./src/5.png)
+![](http://o9w4menvt.bkt.clouddn.com/5.png)
 
 __视觉视口(visual viewport)__
 
@@ -160,7 +160,54 @@ __理想视口(ideal viewport)__
 
 那么对于页面的适配我的想法就是，做一个版本，然后通过这种等比例缩放进行适配.那么我们缩放的是什么呢？就是```layout viewport```
 
+大概代码就是
+```html
+<meta name="viewport" content="width=750,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5,user-scalable=no">
+```
 
+__现有适配方案__
+
+1.固定高度，宽度自适应
+
+2.固定宽度，viewport缩放
+
+3.rem做宽度，viewport缩放
+_ _ _
+
+###固定高度，宽度自适应
+
+这也是目前使用最多的方法，垂直方向用定值，水平方向用百分比、定值、flex都行。腾讯、京东、百度、天猫、亚马逊的首页都是使用的这种方法。
+
+随着屏幕宽度变化，页面也会跟着变化，效果就和PC页面的流体布局差不多，在哪个宽度需要调整的时候使用响应式布局调调就行（比如网易新闻），这样就实现了『适配』。
+
+__原理__
+
+这种方法使用了完美视口：
+```html
+<meta name="viewport" content="width=device-width,initial-scale=1">
+```
+这样设置之后，我们就可以不用管手机屏幕的尺寸进行开发了。
+
+###固定宽度，viewport缩放
+
+设计图、页面宽度、viewport width使用一个宽度，浏览器帮我们完成缩放。单位使用px即可。
+
+目前已知荔枝FM、网易新闻在使用这种方法。有兴趣的同学可以看看是怎么做的。
+
+__原理__
+
+这种方法根据屏幕宽度动态生成viewport：
+```html
+<meta name="viewport" content="width=640,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5,user-scalable=no">
+```
+生成的viewport就是浏览器网页的```布局视口```使用640px```这个宽度是设计图的宽度，里面元素都是用PX单位```，然后把页面缩放成50%，这是绝对的等比例缩放。图片、文字等等所有元素都被缩放在手机屏幕中
+```
+开发者可以根据设计图上的标注进行html还原，不用考虑换算
+```
+
+```这个方法跟我上面的假想很像```
+
+![](http://o9w4menvt.bkt.clouddn.com/gif.gif)
 
 手机屏幕的比例一般都是16：9或者16：10 然后设计图也是按这个比例来设计的.
 我们还是以iPhone6 和6Plus为例：
