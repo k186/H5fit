@@ -171,7 +171,7 @@ __现有适配方案__
 
 2.固定宽度，viewport缩放
 
-3.rem做宽度，viewport缩放
+3.rem宽高，viewport缩放
 _ _ _
 
 ###固定高度，宽度自适应
@@ -200,7 +200,7 @@ __原理__
 ```html
 <meta name="viewport" content="width=640,initial-scale=0.5,maximum-scale=0.5,minimum-scale=0.5,user-scalable=no">
 ```
-生成的viewport就是浏览器网页的```布局视口```使用640px```这个宽度是设计图的宽度，里面元素都是用PX单位```，然后把页面缩放成50%```缩放的比例需要根据当前的dpr来设置```，这是绝对的等比例缩放。图片、文字等等所有元素都被缩放在手机屏幕中
+生成的viewport就是浏览器网页的```布局视口```使用640px```这个宽度是设计图的宽度，里面元素都是用PX单位```，然后把页面缩放成50%，这是绝对的等比例缩放。图片、文字等等所有元素都被缩放在手机屏幕中
 ```
 开发者可以根据设计图上的标注进行html还原，不用考虑换算
 ```
@@ -209,12 +209,20 @@ __原理__
 
 ![](./src/6.gif)
 
-手机屏幕的比例一般都是16：9或者16：10 然后设计图也是按这个比例来设计的.
-我们还是以iPhone6 和6Plus为例：
-设计图：750x1334
-那么我们设置 viewport content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"
-css全部写px
-这样就写死了一版本，这个版本刚好完美适配iPhone6，但是如果我们把这个放入iPhone6Plus 那我们就需要把这个 viewport 放大1.5倍
+__rem宽高，viewport缩放__
+
+淘宝现在的解决方案，并且有提供了库
+
+[手淘解决方案](https://github.com/amfe/lib-flexible)
+
+__原理__
+
+1.动态生成 ```viewport```
+2.根据屏幕宽度设置1rem的大小，即给
+```<html>``` 设置```font-size```
+3.根据设备像素比```window.devicePixelRatio```给```<html>```设置```data-dpr```
+
+
 
 
 
