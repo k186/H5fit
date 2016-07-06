@@ -127,7 +127,7 @@ __布局视口（layout viewport）__
 
 ```就是下图中蓝色区域，最先手机端是直接只显示这个区域的，然后通过左右上下滚动 外加缩放 查看```
 
-![](http://o9w4menvt.bkt.clouddn.com/5.png)
+![](./src/5.png)
 
 __视觉视口(visual viewport)__
 
