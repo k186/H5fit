@@ -207,7 +207,7 @@ __原理__
 
 这个方法跟我上面的假想很像
 
-![](http://o9w4menvt.bkt.clouddn.com/gif.gif)
+![](http://o9w4menvt.bkt.clouddn.com/6.gif)
 
 手机屏幕的比例一般都是16：9或者16：10 然后设计图也是按这个比例来设计的.
 我们还是以iPhone6 和6Plus为例：
