@@ -128,3 +128,12 @@ __布局视口（layout viewport）__
 
 ![](./src/5.png)
 
+__视觉视口(visual viewport)__
+
+这个好理解，就是你手机屏幕可见范围！
+
+__理想视口(ideal viewport)__
+
+视觉视口=布局视口
+
+```最后就形成了 图B ```
