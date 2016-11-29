@@ -14,7 +14,7 @@
     
     if(metaEl){
         console.warn('根据自定义的meta标签设置缩放');
-        var match= metaEl.getAttribute('content').match(/inital\-scale=([\d\.])/);//scale=设备像素/物理像素（375/750）
+        var match= metaEl.getAttribute('content').match(/initial\-scale=([\d\.])/);//scale=设备像素/物理像素（375/750）
         if(match){
             scale=parseFloat(match[1]);
             dpr=parseInt(1/scale);//取sacle的倒数
@@ -22,10 +22,10 @@
     }else if(fitEl){//手动设置dpr
         var content=fitEl.getAttribute('content');
         if(content){
-            var initalDpr=content.match(/inital\-dpr=([\d\.])/);
+            var initialDpr=content.match(/initial\-dpr=([\d\.])/);
             var maximumDpr=content.match(/maximum\-dpr=(\d\.)/);
-            if(initalDpr){
-                dpr=parseFloat(initalDpr[1]);
+            if(initialDpr){
+                dpr=parseFloat(initialDpr[1]);
                 scale=parseFloat((1/dpr).toFixed(2));
             }
             if(maximumDpr){
@@ -40,7 +40,7 @@
         }
         scale=1/dpr;
     }
-    docel.setAttribute('data-dpr',dpr);//html 节点添加data-dpr属性
+    docEl.setAttribute('data-dpr',dpr);//html 节点添加data-dpr属性
     if(!metaEl){
         metaEl=doc.createElement('meta');
         metaEl.setAttribute('name','viewport');
@@ -74,8 +74,12 @@
 
     },false);
     //
-    if(doc.readyState==='complete'){
-        
+    if (doc.readyState === 'complete') {
+        doc.body.style.fontSize = 12 * dpr + 'px';
+    } else {
+        doc.addEventListener('DOMContentLoaded', function(e) {
+            doc.body.style.fontSize = 12 * dpr + 'px';
+        }, false);
     }
     H5fit.refreshRem();
     H5fit.dpr=win.dpr=dpr;
