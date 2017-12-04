@@ -60,6 +60,22 @@
         docEl.style.fontSize=rem+'px';
         H5fit.rem=win.rem=rem;
     };
+    H5fit.rem2px=function (rem) {
+       var px = parseFloat(rem) * this.rem;
+          if (typeof rem === 'string' && rem.match(/rem$/)) {
+            px += 'px'
+          }
+          ;
+          return px
+    };
+    H5fit.px2rem = function (px) {
+          var rem = parseFloat(px) / this.rem;
+          if (typeof rem === 'string' && rem.match(/px$/)) {
+            rem += 'rem'
+          }
+          ;
+          return rem
+        };
     //监听窗口大小变化
     win.addEventListener('resize',function () {
         clearTimeout(tid);
